@@ -1,0 +1,5 @@
+<div class="d-flex">
+    <vf-card [mode]="Add" [user]="user" (deleteUser)="deleteUser($event)"></vf-card>
+  
+  <vf-card [mode]="edit-delete" [user]="user" (deleteUser)="deleteUser($event)" *ngFor="let user of users"></vf-card>
+</div>
