@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter,OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
   selector: 'vf-card',
@@ -7,17 +7,24 @@ import { Component, Input, Output, EventEmitter,OnInit } from '@angular/core';
 })
 export class CardComponent implements OnInit {
   private isEditMode = false;
+  private newUser = null;
+
   @Input()
   user;
 
-  private newUser =null;
+  @Input()
+  mode;
 
-  ngOnInit(){
-  this.newUser = JSON.parse(JSON.stringify(this.user));
-    console.log(this.newUser);
-  }
   @Output()
   deleteUser = new EventEmitter<any>();
+
+  @Output()
+  createUser  = new EventEmitter<any>();
+
+  ngOnInit() {
+    this.newUser = this.user ? JSON.parse(JSON.stringify(this.user)) : { name: '', age: 0 };
+    console.log(this.newUser);
+  }
 
   delete() {
     this.deleteUser.emit(this.user.id);
@@ -29,11 +36,17 @@ export class CardComponent implements OnInit {
 
   cancel() {
     this.isEditMode = false;
+    this.newUser=JSON.parse(JSON.stringify(this.user)) ; 
   }
   save() {
     this.user.name = this.newUser.name;
     this.user.age = this.newUser.age;
     this.isEditMode = false;
+  }
+
+  create(){
+    this.createUser.emit(this.newUser);
+    this.newUser = { name: '', age: 0 };
   }
 }
 

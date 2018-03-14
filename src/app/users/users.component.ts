@@ -23,17 +23,15 @@ export class UsersComponent {
       age: 26
     }
   ];
-  isEven = true;
-  validate(user: any) {
-    return this.isEven ? user.id % 2 === 0 : user.id % 2 !== 0;
+
+  createUser(user: any) {
+    this.users.push(JSON.parse(JSON.stringify(user)));
   }
+
   deleteUser(id: number) {
     this.users = this.users.filter((user) => {
       console.log(this);
       return user.id !== id;
     });
-  }
-  toggle() {
-    this.isEven = !this.isEven;
   }
 }

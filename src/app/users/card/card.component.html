@@ -1,11 +1,17 @@
 <div *ngIf="user" class="card-container justify-content-center card">
   <img class="card-img-top" src="/assets/user.png" alt="Card image">
   <div class="card-body form-group">
-    <h4 *ngIf="!isEditMode" class="card-title">{{user.name || 'name'}}</h4>
-    <input class="form-control"  *ngIf="isEditMode" [(ngModel)]="newUser.name" type="text">
-    <p *ngIf="!isEditMode" class="card-text">Age: {{user.age || 25}}</p>
-    <input  class="form-control"  *ngIf="isEditMode" [(ngModel)]="newUser.age" type="text">
-    
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <p *ngIf="!isEditMode"  class="card-text">{{user.name || 'default'}}</p>
+      <input class="form-control" *ngIf="isEditMode" [(ngModel)]="newUser.name" type="text">
+    </div>
+    <div  class="form-group">
+      <label for="age">Age:</label>
+      <p *ngIf="!isEditMode" class="card-text">{{user.age || 25}}</p>
+      <input class="form-control" *ngIf="isEditMode" [(ngModel)]="newUser.age" type="text">
+      
+    </div>
     <div *ngIf="!isEditMode" class="d-flex justify-content-between">
       <button class="btn btn-danger" (click)="delete()">Delete</button>
       <button class="btn btn-primary" (click)="edit()">Edit</button>
@@ -13,6 +19,22 @@
     <div *ngIf="isEditMode" class="d-flex justify-content-between">
       <button class="btn btn-default" (click)="cancel()">Cancel</button>
       <button class="btn btn-success" (click)="save()">Save</button>
+    </div>
+  </div>
+</div>
+<div *ngIf="!user" class="card-container justify-content-center card">
+  <img class="card-img-top" src="/assets/user.png" alt="Card image">
+  <div class="card-body form-group">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input name="name" id="name" class="form-control" [(ngModel)]="newUser.name" type="text">
+    </div>
+    <div class="form-group">
+      <label for="age">Age:</label>
+      <input name="age" id="age" class="form-control" [(ngModel)]="newUser.age" type="number">
+    </div>
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-primary" (click)="create()">Create</button>
     </div>
   </div>
 </div>
